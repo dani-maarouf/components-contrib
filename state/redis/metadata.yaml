@@ -15,6 +15,51 @@ capabilities:
   - transactional
   - etag
   - query
+authenticationProfiles:
+  - title: "Username and password"
+    description: "Authenticate using username and password."
+    metadata:
+      - name: redisUsername
+        type: string
+        required: false
+        description: |
+          Username for Redis host. Defaults to empty. Make sure your Redis server
+          version is 6 or above, and have created ACL rule correctly.
+        example:  "my-username"
+        default: ""
+      - name: redisPassword
+        type: string
+        required: false
+        sensitive: true
+        description: |
+          Password for Redis host. No default. Use secretKeyRef for
+          secret reference
+        example:  "KeFg23!"
+        default: ""
+      - name: sentinelUsername
+        type: string
+        required: false
+        description: |
+          Username for Redis Sentinel. Applicable only when "failover" is true, and
+          Redis Sentinel has authentication enabled. Defaults to empty.
+        example: "my-sentinel-username"
+        default: ""
+        url:
+          title: "Redis Sentinel authentication documentation"
+          url: "https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/#configuring-sentinel-instances-with-authentication"
+      - name: sentinelPassword
+        type: string
+        required: false
+        sensitive: true
+        description: |
+          Password for Redis Sentinel. Applicable only when "failover" is true, and
+          Redis Sentinel has authentication enabled. Use secretKeyRef for
+          secret reference. Defaults to empty.
+        example: "KeFg23!"
+        default: ""
+        url:
+          title: "Redis Sentinel authentication documentation"
+          url: "https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/#configuring-sentinel-instances-with-authentication"
 metadata:
   - name: redisHost
     required: true
